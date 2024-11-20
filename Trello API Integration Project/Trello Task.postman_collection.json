@@ -1,0 +1,790 @@
+{
+	"info": {
+		"_postman_id": "2baf1aa0-cf93-4a49-a788-15e35a7137a2",
+		"name": "Trello Task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38798897"
+	},
+	"item": [
+		{
+			"name": "Create Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"Task_Board_Id\", jsonData.id);\r",
+							"\r",
+							"//pm.globals.set(\"variable_key\", \"variable_value\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/boards/?name=Task Board 0&key={{key_2}}&token={{token_2}}&defaultLists=false",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Task Board 0"
+						},
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						},
+						{
+							"key": "defaultLists",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/boards/{{Task_Board_Id}}?key={{key_2}}&token={{token_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{Task_Board_Id}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"  \r",
+							"pm.environment.set(\"Task_List_ID\",jsonData.id);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/lists?name=My List&idBoard={{Task_Board_Id}}&key={{key_2}}&token={{token_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "My List"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{Task_Board_Id}}"
+						},
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/lists/{{Task_List_ID}}?key={{key_2}}&token={{token_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"lists",
+						"{{Task_List_ID}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"Card_Task_ID\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/cards?idList={{Task_List_ID}}&name=Card 1&desc=It is card you created inside Trello Task&key={{key_2}}&token={{token_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"cards"
+					],
+					"query": [
+						{
+							"key": "idList",
+							"value": "{{Task_List_ID}}"
+						},
+						{
+							"key": "name",
+							"value": "Card 1"
+						},
+						{
+							"key": "desc",
+							"value": "It is card you created inside Trello Task"
+						},
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Card",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/cards/{{Card_Task_ID}}?key={{key_2}}&token={{token_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{Card_Task_ID}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Checklist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"Task_checklist_ID\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/checklists?idCard={{Card_Task_ID}}&key={{key_2}}&token={{token_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"checklists"
+					],
+					"query": [
+						{
+							"key": "idCard",
+							"value": "{{Card_Task_ID}}"
+						},
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Checklist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/checklists/{{Task_checklist_ID}}?key={{key_2}}&token={{token_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"checklists",
+						"{{Task_checklist_ID}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Checklist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/checklists/{{Task_checklist_ID}}?key={{key_2}}&token={{token_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"checklists",
+						"{{Task_checklist_ID}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get checklist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/checklists/{{Task_checklist_ID}}?key={{key_2}}&token={{token_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"checklists",
+						"{{Task_checklist_ID}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Card",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/cards/{{Card_Task_ID}}?key={{key_2}}&token={{token_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{Card_Task_ID}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/cards/?key={{key_2}}&token={{token_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"cards",
+						""
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Archive List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/lists/{{Task_List_ID}}?key={{key_2}}&token={{token_2}}&closed=true",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"lists",
+						"{{Task_List_ID}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						},
+						{
+							"key": "closed",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"//A 404 Not Found would only occur if:The list ID is incorrect or doesn’t exist.\r",
+							"//There are permission issues (e.g., the user doesn’t have access to the list or board).\r",
+							"//So, after archiving, the expected response for a valid GET request would still be 200 OK, with all the list's details."
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/lists/{{Task_List_ID}}?key={{key_2}}&token={{token_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"lists",
+						"{{Task_List_ID}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/boards/{{Task_Board_Id}}?key={{key_2}}&token={{token_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{Task_Board_Id}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/boards/{{Task_Board_Id}}?key={{key_2}}&token={{token_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{Task_Board_Id}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All board",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/1/members/me/boards?key={{key_2}}&token={{token_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"1",
+						"members",
+						"me",
+						"boards"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key_2}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token_2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.test(\"Response time is less than 3000ms\", function ()\r",
+					" {\r",
+					"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+					"});"
+				]
+			}
+		}
+	]
+}
